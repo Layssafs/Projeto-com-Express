@@ -1,48 +1,59 @@
-const pool = require("../database/connection");
+const db = require("../database/connection");
 
-async function createUser(name, email) {
-  const query = `
+async function saveUser(data) {
+  const sql = `
     INSERT INTO users (name, email)
     VALUES ($1, $2)
-    RETURNING *;
+    RETURNING id, name, email
   `;
-  const values = [name, email];
-  const result = await pool.query(query, values);
+  const result = await db.query(sql, [
+    data.name,
+    data.email,
+  ]);
   return result.rows[0];
 }
 
-async function getAllUsers() {
-  const result = await pool.query("SELECT * FROM users ORDER BY id ASC");
+async function fetchUsers() {
+  const result = await db.query(
+    "SELECT id, name, email FROM users ORDER BY id"
+  );
   return result.rows;
 }
 
-async function getUserById(id) {
-  const result = await pool.query(
-    "SELECT * FROM users WHERE id = $1",
-    [id]
+async function fetchUserById(userId) {
+  const result = await db.query(
+    "SELECT id, name, email FROM users WHERE id = $1",
+    [userId]
   );
   return result.rows[0];
 }
 
-async function updateUser(id, name, email) {
-  const query = `
+async function changeUser(userId, data) {
+  const sql = `
     UPDATE users
     SET name = $1, email = $2
     WHERE id = $3
-    RETURNING *;
+    RETURNING id, name, email
   `;
-  const result = await pool.query(query, [name, email, id]);
+  const result = await db.query(sql, [
+    data.name,
+    data.email,
+    userId,
+  ]);
   return result.rows[0];
 }
 
-async function deleteUser(id) {
-  await pool.query("DELETE FROM users WHERE id = $1", [id]);
+async function removeUserById(userId) {
+  await db.query(
+    "DELETE FROM users WHERE id = $1",
+    [userId]
+  );
 }
 
 module.exports = {
-  createUser,
-  getAllUsers,
-  getUserById,
-  updateUser,
-  deleteUser,
+  saveUser,
+  fetchUsers,
+  fetchUserById,
+  changeUser,
+  removeUserById,
 };

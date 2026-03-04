@@ -1,45 +1,58 @@
 const repository = require("./userRepository");
 
-async function create(req, res) {
+async function createUser(req, res) {
   const { name, email } = req.body;
-  const user = await repository.createUser(name, email);
-  res.status(201).json(user);
+
+  const created = await repository.saveUser({
+    name,
+    email,
+  });
+
+  return res.status(201).json(created);
 }
 
-async function list(req, res) {
-  const users = await repository.getAllUsers();
-  res.json(users);
+async function listUsers(req, res) {
+  const users = await repository.fetchUsers();
+  return res.json(users);
 }
 
-async function show(req, res) {
+async function getUser(req, res) {
   const { id } = req.params;
-  const user = await repository.getUserById(id);
+
+  const user = await repository.fetchUserById(id);
 
   if (!user) {
-    return res.status(404).json({ message: "Usuário não encontrado" });
+    return res
+      .status(404)
+      .json({ error: "Usuário não localizado" });
   }
 
-  res.json(user);
+  return res.json(user);
 }
 
-async function update(req, res) {
+async function updateUser(req, res) {
   const { id } = req.params;
   const { name, email } = req.body;
 
-  const user = await repository.updateUser(id, name, email);
-  res.json(user);
+  const updated = await repository.changeUser(id, {
+    name,
+    email,
+  });
+
+  return res.json(updated);
 }
 
-async function remove(req, res) {
+async function deleteUser(req, res) {
   const { id } = req.params;
-  await repository.deleteUser(id);
-  res.status(204).send();
+
+  await repository.removeUserById(id);
+  return res.status(204).send();
 }
 
 module.exports = {
-  create,
-  list,
-  show,
-  update,
-  remove,
+  createUser,
+  listUsers,
+  getUser,
+  updateUser,
+  deleteUser,
 };
