@@ -105,13 +105,13 @@ Substitua `SUA_SENHA` pela senha do seu PostgreSQL.
 # ▶️ 5️⃣ Executar o Projeto
 
 ```bash
-node src/app.js
+nom run dev
 ```
 
 Se estiver usando nodemon:
 
 ```bash
-npx nodemon src/app.js
+npx run dev src/app.js
 ```
 
 ---
@@ -150,3 +150,4 @@ DELETE /users/:id
 - Verifique se a porta 3000 está livre.
 - Caso ocorra erro de conexão, revise usuário, senha e porta do PostgreSQL.
 - As consultas são feitas diretamente com SQL utilizando o driver `pg`.
+
