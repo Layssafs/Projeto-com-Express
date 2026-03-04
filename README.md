@@ -1,128 +1,95 @@
-# 🚀 API de Usuários com Express.js
+🚀 API de Usuários com Express.js + Prisma + PostgreSQL
 
-Este projeto é uma API simples desenvolvida com Express.js e PostgreSQL para gerenciamento de usuários.
+Esta é uma API REST desenvolvida com Express.js, utilizando Prisma ORM para integração com PostgreSQL, permitindo o gerenciamento completo de usuários (CRUD).
 
----
+O projeto foi estruturado seguindo boas práticas de organização, separação de responsabilidades e uso de ORM para facilitar a manutenção e escalabilidade da aplicação.
 
-# 📦 Dependências
+🛠️ Tecnologias Utilizadas
 
-express  
-pg  
-dotenv  
+Node.js v24.13.1
 
----
+Express v5.2.1
 
-# 🟢 Versão da Linguagem e Versão da ORM
+Prisma ORM v7.4.1
 
-Node.js v24.13.1 
-Express express@5.2.1 
-Não utiliza ORM (usa driver pg para conexão direta com PostgreSQL)
+PostgreSQL
 
----
+Nodemon (ambiente de desenvolvimento)
 
-# 📋 Pré-requisitos
+📦 Dependências Principais
 
-Antes de começar, você precisa ter instalado:
+express
 
-- Node.js 18 ou superior
-- PostgreSQL
-- npm (gerenciador de pacotes do Node)
+@prisma/client
 
-Verifique sua versão do Node:
+prisma
 
-```bash
+nodemon (dev)
+
+📋 Pré-requisitos
+
+Antes de iniciar, você precisa ter instalado:
+
+Node.js 18 ou superior
+
+PostgreSQL
+
+npm
+
+Verifique as versões:
+
 node -v
-```
-
-Verifique sua versão do npm:
-
-```bash
 npm -v
-```
-
----
-
-# 📦 1️⃣ Clonar o Repositório
-
-```bash
+📥 1️⃣ Clonar o Repositório
 git clone URL_DO_REPOSITORIO
 cd NOME_DO_PROJETO
-```
-
----
-
-# 📥 2️⃣ Instalar as Dependências
-
-```bash
+📦 2️⃣ Instalar as Dependências
 npm install
-```
-
-Caso precise instalar manualmente:
-
-```bash
-npm install express pg dotenv
-```
-
----
-
-# 🗄 3️⃣ Configurar o Banco de Dados
+🗄 3️⃣ Configurar o Banco de Dados
 
 Certifique-se de que o PostgreSQL esteja em execução.
 
-## Criar o banco:
+Crie o banco de dados:
 
-```sql
 CREATE DATABASE express_db;
-```
 
----
+A conexão com o banco é definida no arquivo:
 
-## Criar a tabela:
+prisma.config.ts
 
-```sql
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  email VARCHAR(150) UNIQUE NOT NULL
-);
-```
+Exemplo de string de conexão:
 
----
+postgresql://postgres:SUA_SENHA@localhost:5432/express_db
 
-# 🔐 4️⃣ Configurar Variáveis de Ambiente
+Substitua SUA_SENHA pela senha do seu PostgreSQL.
 
-Crie um arquivo `.env` na raiz do projeto:
+🔄 4️⃣ Executar as Migrations
 
-```
-DATABASE_URL=postgres://postgres:SUA_SENHA@localhost:5432/express_db
-PORT=3000
-```
+Após configurar o banco, execute:
 
-Substitua `SUA_SENHA` pela senha do seu PostgreSQL.
+npx prisma migrate dev --name init
 
----
+Esse comando irá:
 
-# ▶️ 5️⃣ Executar o Projeto
+Criar as tabelas no banco
 
-```bash
-nom run dev
-```
+Aplicar as migrations
 
-Se estiver usando nodemon:
+Gerar o Prisma Client automaticamente
 
-```bash
-npx run dev src/app.js
-```
+▶️ 5️⃣ Executar o Projeto
 
----
+Modo desenvolvimento:
 
-# 🌐 6️⃣ Acessar a Aplicação
+npm run dev
 
-Após iniciar o servidor, acesse:
+A aplicação iniciará na porta definida (geralmente 3000).
 
-```
+🌐 6️⃣ Acessar a Aplicação
+
+Abra no navegador:
+
 http://localhost:3000
-```
 
 ---
 
@@ -150,4 +117,5 @@ DELETE /users/:id
 - Verifique se a porta 3000 está livre.
 - Caso ocorra erro de conexão, revise usuário, senha e porta do PostgreSQL.
 - As consultas são feitas diretamente com SQL utilizando o driver `pg`.
+
 
