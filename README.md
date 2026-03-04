@@ -4,7 +4,8 @@ Esta é uma API REST desenvolvida com Express.js, utilizando Prisma ORM para int
 
 O projeto foi estruturado seguindo boas práticas de organização, separação de responsabilidades e uso de ORM para facilitar a manutenção e escalabilidade da aplicação.
 
-🛠️ Tecnologias Utilizadas
+
+🛠️ Tecnologias Utilizadas:
 
 Node.js v24.13.1
 
@@ -16,7 +17,8 @@ PostgreSQL
 
 Nodemon (ambiente de desenvolvimento)
 
-📦 Dependências Principais
+
+📦 Dependências Principais:
 
 express
 
@@ -25,6 +27,7 @@ express
 prisma
 
 nodemon (dev)
+
 
 📋 Pré-requisitos
 
@@ -36,6 +39,7 @@ PostgreSQL
 
 npm
 
+
 Verifique as versões:
 
 node -v
@@ -43,8 +47,10 @@ npm -v
 📥 1️⃣ Clonar o Repositório
 git clone URL_DO_REPOSITORIO
 cd NOME_DO_PROJETO
+
 📦 2️⃣ Instalar as Dependências
 npm install
+
 🗄 3️⃣ Configurar o Banco de Dados
 
 Certifique-se de que o PostgreSQL esteja em execução.
